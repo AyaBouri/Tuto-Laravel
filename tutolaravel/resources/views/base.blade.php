@@ -17,6 +17,9 @@
         </style>
     </head>
     <body>
+    @php
+        $routeName=request()->route()->getName();
+    @endphp
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Blog</a>
@@ -27,7 +30,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-item active" aria-current="page" href="{{route('blog.index')}}">Blog</a>
+                            <a @class(['nav-link','active'=>str_starts_with($routeName,'blog.')]) aria-current="page" href="{{route('blog.index')}}">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Link</a>
@@ -37,7 +40,6 @@
             </div>
         </nav>
         <div class="container">
-            @dump(request());
             @yield('content')
         </div>
     </body>

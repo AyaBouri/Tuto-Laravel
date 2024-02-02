@@ -1,12 +1,18 @@
 <?php
 namespace App\Http\Controllers;
 use App\Models\Post;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Validator;
 class BlogController extends Controller
 {
     public function index():View{
+        $validator=Validator::make([
+            'title'=>'',
+        ],[
+            'title'=>'required | min:8'
+        ]);
+        dd($validator->errors());
         return view('blog.index',[
             'posts' => Post::paginate(1),
         ]);

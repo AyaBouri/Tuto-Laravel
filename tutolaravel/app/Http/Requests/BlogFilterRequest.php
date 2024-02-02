@@ -1,8 +1,7 @@
 <?php
 namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
-use Psy\Util\Str;
-
+use Illuminate\Support\Str;
 class BlogFilterRequest extends FormRequest
 {
     /**

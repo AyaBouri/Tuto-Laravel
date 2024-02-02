@@ -20,7 +20,7 @@ Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(
     Route::get('/','index')->name('index');
 //list
     Route::get('/{slug}-{post}','show')->where([
-        'id'=>'[0-9]+',
+        'post'=>'[0-9]+',
         'slug'=>'[a-z0-9\-]+'
     ])->name('show');
 });

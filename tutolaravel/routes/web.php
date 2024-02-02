@@ -17,10 +17,16 @@ Route::get('/', function () {
 Route::prefix('/blog')->name('blog.')->group(function (){
     //accueil
     Route::get('/',function (Request $request){
+        $post=new \App\Models\Post();
+        $post->title='Mon second article';
+        $post->slug='mon-second-article';
+        $post->content='Mon contenu';
+        $post->save();
+        return $post;
         return [
             "link"=> \route('blog.show',['slug'=>'article','id'=>13])
         ];
-    })->name('blog.index');
+    })->name('index');
 //list
     Route::get('/{slug}-{id}',function (string $slug,string $id,Request $request){
         return [

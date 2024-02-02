@@ -7,7 +7,7 @@ use Illuminate\View\View;
 class BlogController extends Controller
 {
     public function index():View{
-        $posts= Post::paginate(25);
+        //$posts= Post::paginate(25);
         return view('blog.index');
     }
     public function show(string $slug,string $id):RedirectResponse|Post{

@@ -23,6 +23,8 @@ Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(
     Route::get('/new','create')->name('create');
     //Methode Post
     Route::post('/new','store');
+    Route::get('/{post}/edit','edit')->name('edit');
+    Route::post('/{post}/edit','update');
 //list
     Route::get('/{slug}-{post}','show')->where([
         'post'=>'[0-9]+',

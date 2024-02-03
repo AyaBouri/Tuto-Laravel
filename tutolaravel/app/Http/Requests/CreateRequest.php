@@ -2,6 +2,8 @@
 namespace App\Http\Requests;
 use \Illuminate\Support\Str;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
 class CreateRequest extends FormRequest
 {
     /**
@@ -20,10 +22,11 @@ class CreateRequest extends FormRequest
     {
         return [
             'title'=>['required','min:8'],
-            'slug'=>['required','min:8','regex:/^[0-9a-z\-]+$/'],
+            'slug'=>['required','min:8','regex:/^[0-9a-z\-]+$/',Rule::unique('posts')],
             'content'=>['required']
         ];
     }
+    //19:24
     protected function prepareForValidation(){
         $this->merge([
             'slug'=>$this->input('slug') ?: Str::slug($this->input('title'))

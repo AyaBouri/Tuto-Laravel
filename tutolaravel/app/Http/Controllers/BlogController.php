@@ -13,7 +13,7 @@ use App\Http\Requests\CreateRequest;
 class BlogController extends Controller
 {
     public function create(){
-        dd(session()->all());
+        //dd(session()->all());
         return view('blog.create');
     }
 
@@ -40,5 +40,14 @@ class BlogController extends Controller
         return view('blog.show',[
             'post'=>$post
         ]);
+    }
+    public function edit(Post $post){
+        return view('blog.edit',[
+            'post'=>$post
+        ]);
+    }
+    public function update(Post $post,CreatePostRequest $request){
+        $post->update($request->validated());
+        return redirect()->route('blog.show',['slug'=>$post->slug,'post'=>$post->id])->with('success','L article a bien été modifier');
     }
 }

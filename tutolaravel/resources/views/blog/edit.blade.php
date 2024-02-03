@@ -1,27 +1,27 @@
 @extends('base')
-@section('title','Créer un article')
+@section('title','Modifier un article')
 @section('content')
     <form action="" method="post">
         @csrf
         <div>
             <label>Title</label>
-            <input type="text" name="title" value="{{ old('title','Mon titre') }}">
+            <input type="text" name="title" value="{{ old('title',$post->title) }}">
             @error('title')
-                {{ $message }}
+            {{ $message }}
             @enderror
         </div>
         <div>
             <label>Slug</label>
-            <input type="text" value="{{old('slug','Slug')}}">
+            <input type="text" value="{{old('slug',$post->slug)}}">
             @error('slug')
-                {{$slug}}
+            {{$slug}}
             @enderror
         </div>
         <div>
             <label>Content</label>
-            <textarea name="content">{{old('content','Contenu de demonstartion')}}</textarea>
+            <textarea name="content">{{old('content',$post->content)}}</textarea>
             @error('content')
-                {{ $content }}
+            {{ $content }}
             @enderror
         </div>
         <button>Enregistrer</button>

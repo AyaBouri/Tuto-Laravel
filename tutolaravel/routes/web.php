@@ -18,6 +18,11 @@ Route::get('/', function () {
 Route::prefix('/blog')->name('blog.')->controller(BlogController::class)->group(function (){
     //accueil
     Route::get('/','index')->name('index');
+    //Cree un nouveau article
+    //Methode Get
+    Route::get('/new','create')->name('create');
+    //Methode Post
+    Route::post('/new','store');
 //list
     Route::get('/{slug}-{post}','show')->where([
         'post'=>'[0-9]+',

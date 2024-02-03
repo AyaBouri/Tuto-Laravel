@@ -9,19 +9,21 @@ use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\Paginator;
+use App\Http\Requests\CreateRequest;
 class BlogController extends Controller
 {
     public function create(){
+        dd(session()->all());
         return view('blog.create');
     }
-    public function store(Request $request){
-        $post=Post::create([
-            'title'=>$request->input('title'),
-            'content'=>$request->input('content'),
-            'slug'=>Str::slug($request->input('title'))
-        ]);
+
+    /**
+     * @return RedirectResponse
+     */
+    public function store(CreateRequest $request){
+        $post=Post::create($request->validated());
         //dd($request->all());
-        return redirect()->route('blog.show',['slug'=>$post->slug,'post'=>$post->id]);
+        return redirect()->route('blog.show',['slug'=>$post->slug,'post'=>$post->id])->with('success','L article a bien été sauvegarder');
     }
     public function index(BlogFilterRequest $request):View{
         //dd($request->validated());
